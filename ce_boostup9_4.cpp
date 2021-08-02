@@ -1,7 +1,8 @@
 #include <iostream>
-
+#include <cmath>
 #include<math.h>
 #include<string.h>
+#include <limits>
 using namespace std;
 int main(){
 //    int num[100000];
@@ -153,8 +154,10 @@ int main(){
 double a[3],b[3];
 int p=0;
 for(int i=0;i<3;i++){
-    scanf("%lf",&a[i]);
-    if(a[i]<=0)
+    if(!(scanf("%lf",&a[i])  ))
+        goto End;
+
+    if(a[i]<=0.0001 or a[i]==0)
         p=1;
     b[i]=a[i];
     for(int j=0;j<i;j++){
@@ -170,12 +173,14 @@ if(a[2]>=a[0]+a[1] or p==1){
     printf("are NOT sides of triangle.");
 }
 else{
-        a[0]*=a[0];
         a[1]*=a[1];
+        a[0]*=a[0];
         a[2]*=a[2];
-    if(a[2]==a[1]+a[0])
+        //cout<<a[0]<<" "<<a[1]<<" "<<a[2]<<" "<<a[0]+a[1] <<endl;
+    if(abs(a[2]-a[1]-a[0])<0.0001)
         printf("are sides of RIGHT triangle.");
     else
         printf("are NOT sides of RIGHT triangle, just a TRIANGLE.");
 }
+End:;
 }
